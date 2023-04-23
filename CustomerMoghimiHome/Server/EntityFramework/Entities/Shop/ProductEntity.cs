@@ -10,6 +10,7 @@ public class ProductEntity : BaseEntity
     public decimal Price { get; set; }
     public string BuilderCompany { get; set; } = "Microlab";
     public string ProductDescription { get; set; } = string.Empty;
+    public string StringTagList { get; set; }
 
     public long ProductCategoryEnityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
