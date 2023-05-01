@@ -67,15 +67,14 @@ builder.Services.AddMudServices(config =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
-builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ITokenExtension, TokenExtension>();
-builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddScoped<ITokenExtension, TokenExtension>();
-builder.Services.AddAuthorizationCore();
+
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+builder.Services.AddBlazoredSessionStorage();
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IDentityContext>().AddDefaultTokenProviders();
 #region IDentity with jwt
 var jwtSetting = new JwtSetting();

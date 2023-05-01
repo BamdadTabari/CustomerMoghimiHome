@@ -26,7 +26,7 @@
         background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%, rgba(6,38,102,1) 99%);
     }
 </style>
-<Router AppAssembly="@typeof(App).Assembly">
+@*<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -37,14 +37,16 @@
             <p role="alert">Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
-</Router>
-@*
+</Router>*@
+
 <CascadingAuthenticationState>
-    <Router AppAssembly="@typeof(App).Assembly">
+    <Router AppAssembly="@typeof(Program).Assembly">
         <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <Authorizing>
+                    <text>Please wait, we are authorizint the user.</text>
+                </Authorizing>
+            </AuthorizeRouteView>
         </Found>
         <NotFound>
             <PageTitle>Not found</PageTitle>
@@ -53,4 +55,4 @@
             </LayoutView>
         </NotFound>
     </Router>
-</CascadingAuthenticationState*@>
+</CascadingAuthenticationState>
