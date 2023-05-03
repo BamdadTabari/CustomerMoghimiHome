@@ -1,6 +1,6 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 
