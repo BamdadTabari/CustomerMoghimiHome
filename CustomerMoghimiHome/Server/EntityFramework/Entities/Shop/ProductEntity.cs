@@ -13,6 +13,7 @@ public class ProductEntity : BaseEntity
 
     public long ProductCategoryEnityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
+    public List<BasketProductEntity> BasketProduct { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
