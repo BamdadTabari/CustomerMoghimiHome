@@ -6,7 +6,7 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 
 public class BasketEntity : BaseEntity
 {
-    public Guid UserId { get; set; }
+    public string UserId { get; set; }
     public bool IsDone { get; set; }
 
     public List<BasketProductEntity> BasketProduct { get; set; }
