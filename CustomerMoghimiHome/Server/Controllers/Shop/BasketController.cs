@@ -27,17 +27,20 @@ public class BasketController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<BasketDto>(data));
         if (dto != null)
         {
-            var user = await _userManager.GetUserAsync(User);
-            //dto.UserId = user.;
+            var user = await _userManager.GetUserAsync(User) ?? throw new NullReferenceException("user not found");
+            dto.UserId = user.Id;
+            dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<BasketEntity>(dto));
             await _unitOfWork.Baskets.AddAsync(entity);
             
-            foreach (var item in dto.BasketProductList)
+            foreach (var item in entity.BasketProduct)
             {
-                
+                await _unitOfWork.BasketProducts.AddAsync(new BasketProductEntity
+                {
+                    BasketId = item.Id,
+                    ProductId = item.ProductId,
+                });
             }
-            dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
-            
             
             await _unitOfWork.CommitAsync();
         }
