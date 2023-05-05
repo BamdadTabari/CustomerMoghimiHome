@@ -16,4 +16,13 @@ public partial class ProductDetailPage
     }
     #endregion
 
+    #region Actions
+
+    private async Task AddToBasket()
+    {
+        await _httpService.GetValue<BasketDto>(BasketRoutes.Basket + CRUDRouts.Create);
+    }
+
+    #endregion
+
 }
