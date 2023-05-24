@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CustomerMoghimiHome.Server.Controllers.Identity
 {
@@ -51,7 +49,7 @@ namespace CustomerMoghimiHome.Server.Controllers.Identity
         //}
 
         [HttpGet(AuthRoutes.Account + CRUDRouts.ReadOneById + "/{userEmail}")]
-        public async Task<UserDetailDto> GetUserDetail([FromRoute]string UserEmail)
+        public async Task<UserDetailDto> GetUserDetail([FromRoute] string UserEmail)
         {
             var user = await _userManager.FindByEmailAsync(UserEmail);
             return new UserDetailDto

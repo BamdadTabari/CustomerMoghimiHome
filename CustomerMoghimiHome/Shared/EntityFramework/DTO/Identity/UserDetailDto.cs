@@ -4,7 +4,7 @@ namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity
 {
     public class UserDetailDto
     {
-        [Required(ErrorMessage ="لطفا مقدار نام کاربری را پر کنید")]
+        [Required(ErrorMessage = "لطفا مقدار نام کاربری را پر کنید")]
         public string? UserName { get; set; }
         [EmailAddress]
         [Required(ErrorMessage = "لطفا مقدار ایمیل را پر کنید")]

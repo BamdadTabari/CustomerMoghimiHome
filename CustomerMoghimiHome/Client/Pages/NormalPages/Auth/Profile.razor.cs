@@ -1,9 +1,7 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
-using System.Reflection;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
 
