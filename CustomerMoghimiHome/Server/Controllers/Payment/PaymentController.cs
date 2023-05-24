@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
 using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CustomerMoghimiHome.Server.Controllers.Payment;
 [ApiController]
@@ -16,8 +18,9 @@ public class PaymentController : ControllerBase
     string callbackurl = "http://localhost:2812/Home/VerifyByHttpClient";
 
     [HttpPost(PaymentRouts.PaymentByHttpClient)]
-    public async Task<IActionResult> PaymentByHttpClient()
+    public async Task<IActionResult> PaymentByHttpClient([FromBody] string data)
     {
+        //var amount = data;
         try
         {
             using (var client = new HttpClient())

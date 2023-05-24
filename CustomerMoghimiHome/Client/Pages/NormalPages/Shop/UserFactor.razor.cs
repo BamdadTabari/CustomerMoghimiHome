@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Payment;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
@@ -15,5 +16,16 @@ public partial class UserFactor
         model = await _httpService.GetValueList<BasketDetailDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
         FactorPrice = model.Sum(x => x.ProductTotalPrice);
     }
+
+    #endregion
+
+    #region Actions
+
+    public async Task Payment()
+    {
+        
+        await _httpService.PostValue<string>(PaymentRouts.PaymentByHttpClient, FactorPrice.ToString());
+    }
+
     #endregion
 }
