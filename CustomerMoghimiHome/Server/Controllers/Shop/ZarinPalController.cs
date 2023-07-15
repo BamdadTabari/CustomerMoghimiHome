@@ -21,7 +21,7 @@ public class ZarinPalController: ControllerBase
                 {
                     { "MerchantID", model.MerchantID }, //Change This To work, some thing like this : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
                     { "Amount", model.Amount }, //Toman
-                    { "CallbackURL", "http://localhost:5000/Home/VerifyPayment" },
+                    { "CallbackURL", "https://localhost:44345/VerifyPayment" },
                     { "Mobile", model.Mobile }, //Mobile number will be shown in the transactions list of the wallet as a separate field.
                     { "Description", model.Description }
                 };
@@ -35,9 +35,11 @@ public class ZarinPalController: ControllerBase
         ZarinPalRequestResponseModel _zarinPalResponseModel =
          JsonConvert.DeserializeObject<ZarinPalRequestResponseModel>(_responseString);
 
+        if (_response.StatusCode != System.Net.HttpStatusCode.OK) // Post Error
+            return (IActionResult)(new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest));
 
-        //SandBox Mode
-        //return Redirect("https://sandbox.zarinpal.com/pg/StartPay/"+_zarinPalResponseModel.Authority/*+"/Sad"*/); 
+        if (_zarinPalResponseModel.Status != 100) //Zarinpal Did not Accepted the payment
+            return (IActionResult)(new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest));
 
         // [/ُSad] will redirect to the sadad gateway if you already have zarin gate enabled, let's read here
         // https://www.zarinpal.com/blog/زرین-گیت،-درگاهی-اختصاصی-به-نام-وبسایت/
