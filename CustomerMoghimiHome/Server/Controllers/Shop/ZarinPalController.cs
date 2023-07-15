@@ -2,70 +2,59 @@
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.ZarinPal;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
+using System.Net;
 using System.Text;
 
 namespace CustomerMoghimiHome.Server.Controllers.Shop;
 [ApiController]
 public class ZarinPalController: ControllerBase
 {
-    private static readonly HttpClient client = new HttpClient();
 
     [HttpPost(ShopRoutes.ZarinPal + CRUDRouts.RequestPayment)]
-    public async Task<IActionResult> RequestPayment(ZarinPalRequestModel model)
+    public async Task RequestPayment(ZarinPalRequestModel model, object sender, EventArgs e)
     {
-        //SandBox Mode
-        //var _url = "https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json";
-        var _url = "https://www.zarinpal.com/pg/rest/WebGate/PaymentRequest.json";
+        // Set the necessary parameters for the payment
+        string merchantID = "YOUR_MERCHANT_ID"; // Replace with your ZarinPal Merchant ID
+        
+        string callbackUrl = "http://example.com/VerifyPayment.aspx"; // Replace with the URL to your callback page
 
-        var _values = new Dictionary<string, string>
-                {
-                    { "MerchantID", model.MerchantID }, //Change This To work, some thing like this : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-                    { "Amount", model.Amount }, //Toman
-                    { "CallbackURL", "http://localhost:5000/Home/VerifyPayment" },
-                    { "Mobile", model.Mobile }, //Mobile number will be shown in the transactions list of the wallet as a separate field.
-                    { "Description", model.Description }
-                };
+        // Generate a unique order ID for the payment
+        string orderID = Guid.NewGuid().ToString();
 
-        var _paymentRequestJsonValue = JsonConvert.SerializeObject(_values);
-        var content = new StringContent(_paymentRequestJsonValue, Encoding.UTF8, "application/json");
+        // Prepare the payment request parameters
+        NameValueCollection data = new NameValueCollection();
+        data["MerchantID"] = merchantID; // Merchant ID
+        data["Amount"] = model.Amount; // Payment amount
+        data["Description"] = "Payment description"; // Payment description
+        data["CallbackURL"] = callbackUrl; // Callback URL to receive payment verification result
+        data["Email"] = "user@example.com"; // Customer's email address
+        data["Mobile"] = "09123456789"; // Customer's mobile number
+        data["OrderId"] = orderID; // Unique order ID
 
-        var _response = await client.PostAsync(_url, content);
-        var _responseString = await _response.Content.ReadAsStringAsync();
+        // Perform a POST request to ZarinPal API for payment request
+        WebClient client = new WebClient();
+        byte[] response = client.UploadValues("https://www.zarinpal.com/pg/rest/WebGate/PaymentRequest.json", "POST", data);
 
-        ZarinPalRequestResponseModel _zarinPalResponseModel =
-         JsonConvert.DeserializeObject<ZarinPalRequestResponseModel>(_responseString);
+        // Decode the response JSON
+        string result = Encoding.UTF8.GetString(response);
+        dynamic json = JsonConvert.DeserializeObject(result);
 
-
-        //SandBox Mode
-        //return Redirect("https://sandbox.zarinpal.com/pg/StartPay/"+_zarinPalResponseModel.Authority/*+"/Sad"*/); 
-
-        // [/ُSad] will redirect to the sadad gateway if you already have zarin gate enabled, let's read here
-        // https://www.zarinpal.com/blog/زرین-گیت،-درگاهی-اختصاصی-به-نام-وبسایت/
-        return Redirect("https://www.zarinpal.com/pg/StartPay/" + _zarinPalResponseModel.Authority/*+"/Sad"*/);
+        // Check if the payment request was successful
+        if (json.Status == 100)
+        {
+            // Redirect the user to ZarinPal payment gateway page for completing the payment
+            string paymentURL = "https://www.zarinpal.com/pg/StartPay/" + json.Authority;
+            Response.Redirect(paymentURL);
+        }
+        else
+        {
+            // Handle the errors if the payment request fails
+            string errorCode = json.Status;
+            string errorMessage = json.Message;
+            // Display or log the error message
+            await Response.WriteAsync("Payment request failed. Error code: " + errorCode + ", Message: " + errorMessage);
+        }
     }
 
-    [HttpPost(ShopRoutes.ZarinPal + CRUDRouts.VerifyPayment)]
-    public async Task<IActionResult> VerifyPayment(string Authority, ZarinPalRequestModel model)
-    {
-        //SandBox Mode
-        //var _url = "https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentVerification.json";
-        var _url = "https://www.zarinpal.com/pg/rest/WebGate/PaymentVerification.json";
-
-        var _values = new Dictionary<string, string>
-                {
-                    { "MerchantID", model.MerchantID }, //Change This To work, some thing like this : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-                    { "Authority", Authority },
-                    { "Amount", model.Amount } //Toman
-                };
-
-        var _paymenResponsetJsonValue = JsonConvert.SerializeObject(_values);
-        var content = new StringContent(_paymenResponsetJsonValue, Encoding.UTF8, "application/json");
-
-        var _response = await client.PostAsync(_url, content);
-        var _responseString = await _response.Content.ReadAsStringAsync();
-
-        ZarinPalVerifyResponseModel _zarinPalResponseModel =
-         JsonConvert.DeserializeObject<ZarinPalVerifyResponseModel>(_responseString);
-        return Redirect("https://www.zarinpal.com/pg/StartPay/");
-    }
 }
