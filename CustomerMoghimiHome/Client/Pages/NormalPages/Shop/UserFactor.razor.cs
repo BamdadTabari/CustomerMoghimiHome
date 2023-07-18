@@ -22,13 +22,16 @@ public partial class UserFactor
 
     protected async Task Payment()
     {
+        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = authstate.User.Identity.Name ?? "";
         var paymentModel = new ZarinPalRequestModel()
         {
             Amount = FactorPrice.ToString(),
             CallbackURL = "https://localhost:44345/",
             Description = "خرید از لوازم خانگی مقیمی",
             Mobile = "",
-            MerchantID = ""
+            MerchantID = "",
+            UserName = userName,
         };
         var response = await _httpService.PostValue(ShopRoutes.ZarinPal + CRUDRouts.RequestPayment, paymentModel);
     }

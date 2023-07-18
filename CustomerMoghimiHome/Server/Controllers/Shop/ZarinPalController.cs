@@ -1,5 +1,7 @@
-﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.ZarinPal;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
@@ -10,6 +12,12 @@ namespace CustomerMoghimiHome.Server.Controllers.Shop;
 [ApiController]
 public class ZarinPalController: ControllerBase
 {
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly IUnitOfWork _unitOfWork;
+    public ZarinPalController(IUnitOfWork unitOfWork,UserManager<IdentityUser> userManager)
+    {
+        _userManager = userManager;
+    }
 
     [HttpPost(ShopRoutes.ZarinPal + CRUDRouts.RequestPayment)]
     public async Task RequestPayment(ZarinPalRequestModel model, object sender, EventArgs e)
@@ -43,6 +51,9 @@ public class ZarinPalController: ControllerBase
         // Check if the payment request was successful
         if (json.Status == 100)
         {
+            var user = await _userManager.FindByEmailAsync(model.UserName);
+            var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
+            _unitOfWork.Baskets.Remove(userBasket);
             // Redirect the user to ZarinPal payment gateway page for completing the payment
             string paymentURL = "https://www.zarinpal.com/pg/StartPay/" + json.Authority;
             Response.Redirect(paymentURL);
