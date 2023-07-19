@@ -14,6 +14,8 @@ public class UserBasketEntity : BaseEntity
     public decimal ProductTotalPrice { get; set; }
     public bool IsOrdered { get; set; }
     public List<ProductEntity> ProductEntities { get; set; }
+    public long UserOrderForAdminEntityId { get; set; }
+    public UserOrderForAdminEntity UserOrderForAdminEntity { get; set; }
 }
 
 
@@ -25,8 +27,9 @@ public class UserBasketEntityConfiguration : IEntityTypeConfiguration<UserBasket
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.UserId).IsRequired();
-        builder.Property(e => e.ProductTotalPrice).IsRequired().HasColumnType("decimal(24,4)");
-        builder.Property(e => e.ProductPrice).IsRequired().HasColumnType("decimal(24,4)");
+        builder.Property(e => e.ProductTotalPrice).IsRequired().HasColumnType("decimal(24,0)");
+        builder.Property(e => e.ProductPrice).IsRequired().HasColumnType("decimal(24,0)");
+        builder.HasOne(x=>x.UserOrderForAdminEntity).WithMany(x=>x.UserBasketEntities).HasForeignKey(x=>x.UserOrderForAdminEntityId);
         #endregion
     }
 }
