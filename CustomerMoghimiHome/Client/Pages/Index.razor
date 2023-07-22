@@ -19,129 +19,55 @@
         </MudCarouselItem>
     </MudCarousel>
 </div>
-
-<div class="row mt-15 px-5" style="background-color:#6ec4db;border:1px none #6ec4db; border-radius:3%">
-    <MudText Align="Align.Center" Typo="Typo.h2" Class="shabnam m-3">محصولات پیشنهادی</MudText>
-    <MudGrid Justify="Justify.Center" Class="m-5">
-        @{
-            foreach (var item in productDtos)
-            {
-                <MudItem lg="3" xl="3" md="3" xs="6">
-                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" onclick="@(()=>OnSeeProductButtonClicked(item.Id))" Class="highlight-div">
-                        <MudCardContent>
-                            <div class="d-flex justify-center">
-                                <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                            </div>
-                            <MudDivider />
-                            <div class="d-flex justify-center">
-                                <MudText Typo="Typo.h6" Class="shabnam">
-                                    @item.ProductName
-                                </MudText>
-                            </div>
-                        </MudCardContent>
-                    </MudCard>
-                </MudItem>
-            }
-        }
-    </MudGrid>
+<div class="row mt-3">
+    <MudStack Class="p-3">
+        <MudText Class="fw-bold" Align="Align.Center" Typo="Typo.h2" Style="color:#003A69">Say “hello” to next-gen infra: brilliant,</MudText>
+        <MudText Class="fw-bold" Align="Align.Center" Typo="Typo.h2" Style="color:#003A69">stunningly responsive, adaptive, resilient.</MudText>
+        <MudText Class="fw-bold" Align="Align.Center" Typo="Typo.h6" Style="color:#E62D1E">EXPLORE =></MudText>
+    </MudStack>
 </div>
-<div class="row mt-10 px-5" style="border-bottom:2px double black;">
-    <div class="col-3">
-        <div class="row">
-            <MudCarousel Class="mud-width-full" Style="height:500px;" ShowArrows="false" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
-                @{
-                    foreach (var item in categoryList)
-                    {
-                        <MudCarouselItem Transition="Transition.Slide">
-                            <MudCard Style="width:fit-content;height:fit-content;justify-center; border:1px solid #713cc9;" Class="highlight-div">
-                                <MudCardContent>
-                                    <MudStack>
-                                        <div class="d-flex justify-center">
-                                            <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                                        </div>
-                                        <MudDivider />
-                                        <MudText Typo="Typo.h5" Align="Align.Center" Class="shabnam">@item.CategoryName</MudText>
-                                    </MudStack>
-                                </MudCardContent>
-                                <MudCardActions Class="d-flex justify-center shabnam">
-                                    <MudStack>
-                                        <MudButton Class="m-2 d-flex justify-center row" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">
-                                            <MudText Typo="Typo.h6" Class="shabnam" Style="color:black">مشاهده محصولات</MudText>
-                                        </MudButton>
-                                    </MudStack>
-                                </MudCardActions>
-                            </MudCard>
-                        </MudCarouselItem>
-                    }
-                }
-            </MudCarousel>
+
+<div class="row" style="height:700px;background-color:#E8E8E8">
+    <div class="px-15">
+      <div class="px-15">
+            <MudStack Class="px-15">
+                <MudText Class="fw-bold mt-5" Align="Align.End">OUR CLIENTS’ WORDS</MudText>
+                <MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="false" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+                    <MudCarouselItem Transition="Transition.Slide">
+                        <MudStack Class="p-3">
+                            <MudText Class="fw-bold" Align="Align.End" Typo="Typo.h2" Style="color:#003A69">EALING COUNCIL</MudText>
+                            <MudText Class="fw-bold" Align="Align.End">stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient. </MudText>
+                            <MudText Class="fw-bold" Align="Align.End">Paul maul Khaul</MudText>
+                        </MudStack>
+                    </MudCarouselItem>
+                    <MudCarouselItem Transition="Transition.Slide">
+                        <MudStack Class="p-3">
+                            <MudText Class="fw-bold" Align="Align.End" Typo="Typo.h2" Style="color:#003A69">EALING COUNCIL</MudText>
+                            <MudText Class="fw-bold" Align="Align.End">stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient. </MudText>
+                            <MudText Class="fw-bold" Align="Align.End">Paul maul Khaul</MudText>
+                        </MudStack>
+                    </MudCarouselItem>
+                    <MudCarouselItem Transition="Transition.Slide">
+                        <MudStack Class="p-3">
+                            <MudText Class="fw-bold" Align="Align.End" Typo="Typo.h2" Style="color:#003A69">EALING COUNCIL</MudText>
+                            <MudText Class="fw-bold" Align="Align.End">stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient.stunningly responsive, adaptive, resilient. </MudText>
+                            <MudText Class="fw-bold" Align="Align.End">Paul maul Khaul</MudText>
+                        </MudStack>
+                    </MudCarouselItem>
+                </MudCarousel>
+            </MudStack>
+      </div>
+   </div>
+</div>
+@*<div class="row">
+    <div class="px-15">
+        <div class="px-15 row">
+            <div class="col-3"> </div>
+            <div class="col-3"> </div>
+            <div class="col-3"> </div>
         </div>
     </div>
-
-    <div class="col-9 mt-10 px-5">
-        <MudStack>
-            <MudText Align="Align.Center" Class="mt-5 shabnam" Typo="Typo.h3">دسته بندی محصولات</MudText>
-            <MudSpacer />
-            <MudSpacer />
-            <MudText Align="Align.Right" Class="shabnam" Typo="Typo.h6">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
-            <MudSpacer />
-            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
-                <MudText Align="Align.Center" Class="shabnam" Style="color:white;" Typo="Typo.h6">
-                    ورود به بخش دسته بندی محصولات <MudIcon Icon="@Icons.Material.Filled.More" />
-                </MudText>
-            </MudButton>
-        </MudStack>
-    </div>
-</div>
-
-<div class="row mt-10  justify-content-center px-5">
-    <MudText Align="Align.Center" Class="m-5 shabnam" Typo="Typo.h3">خدمات تیم ما</MudText>
-    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
-        <MudStack>
-            <MudImage Src="/moshavereh.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">مشاوره</MudText>
-            <MudSpacer />
-        </MudStack>
-    </div>
-
-    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%">
-        <MudStack>
-            <MudImage Src="/forosh.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">فروش</MudText>
-            <MudSpacer />
-        </MudStack>
-    </div>
-
-    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
-        <MudStack>
-            <MudImage Src="/nasb.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">نصب و راه اندازی</MudText>
-            <MudSpacer />
-        </MudStack>
-    </div>
-</div>
-
-<div class="row mt-5 px-5">
-    <div class="col-8 mt-5">
-        <MudStack>
-            <MudText Align="Align.Center" Class="m-5 shabnam" Typo="Typo.h3">درباره ما</MudText>
-            <MudText Align="Align.Right" Typo="Typo.h6" Style="color:black" Class="shabnam">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
-
-            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
-                <MudText Align="Align.Center" Class="shabnam" Style="color:white;" Typo="Typo.h6">
-                    مطالعه ادامه مطلب <MudIcon Icon="@Icons.Material.Filled.More" />
-                </MudText>
-            </MudButton>
-        </MudStack>
-    </div>
-    <div class="col-4 mt-15 pt-15">
-        <MudImage Class="img-fluid rounded" Src="/team.png" />
-    </div>
-</div>
-
-<div class="row mt-15 px-5">
-    <CustomerMoghimiHome.Client.Pages.NormalPages.StaticPages.ContactUs />
-</div>
+</div>*@
 @code {
   
     List<ProductDto> productDtos = new();
